@@ -1,0 +1,42 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: chronotask-postgres
+    environment:
+      POSTGRES_USER: chronouser
+      POSTGRES_PASSWORD: chronopass
+      POSTGRES_DB: chronotaskdb
+      PGPORT: 5431
+    ports:
+      - "5431:5431"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - chronotask-network
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    container_name: chronotask-kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: "broker,controller"
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "1@chronotask-kafka:9093"
+      KAFKA_CONTROLLER_LISTENER_NAMES: "CONTROLLER"
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT"
+      KAFKA_LISTENERS: "PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093"
+      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://localhost:9092"
+      KAFKA_INTER_BROKER_LISTENER_NAME: "PLAINTEXT"
+      KAFKA_LOG_DIRS: "/tmp/kraft-combined-logs"
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    networks:
+      - chronotask-network
+
+volumes:
+  postgres_data:
+  kafka-data:
+
+networks:
+  chronotask-network:
+    driver: bridge
