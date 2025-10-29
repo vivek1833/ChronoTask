@@ -1,0 +1,141 @@
+{
+    "info": {
+        "name": "ChronoTask API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": "Postman collection for ChronoTask task-api-service endpoints"
+    },
+    "item": [
+        {
+            "name": "Users",
+            "item": [
+                {
+                    "name": "Create User",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"Alice\",\n  \"email\": \"alice@example.com\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/users",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "users"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Tasks",
+            "item": [
+                {
+                    "name": "Create Task",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"title\": \"Prepare System Design Notes\",\n  \"description\": \"Review distributed scheduling concepts\",\n  \"creatorId\": \"{{creatorId}}\",\n  \"assigneeId\": \"{{assigneeId}}\",\n  \"dueDate\": \"2025-10-20T10:00:00\",\n  \"priority\": \"HIGH\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/tasks",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "tasks"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Task By Id",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/tasks/{{taskId}}",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "tasks",
+                                "{{taskId}}"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Mark Task Completed",
+                    "request": {
+                        "method": "PUT",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/tasks/{{taskId}}/complete",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "tasks",
+                                "{{taskId}}",
+                                "complete"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Pending/Overdue Tasks",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/tasks/pending",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "tasks",
+                                "pending"
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "http://localhost:8080"
+        },
+        {
+            "key": "creatorId",
+            "value": ""
+        },
+        {
+            "key": "assigneeId",
+            "value": ""
+        },
+        {
+            "key": "taskId",
+            "value": ""
+        }
+    ]
+}

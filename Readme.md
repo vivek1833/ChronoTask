@@ -18,7 +18,7 @@ It is composed of three independent microservices communicating via **Kafka**.
 
 ```
  ┌────────────────────┐       ┌───────────────────────┐       ┌─────────────────────┐
- │ Task API Service      │ --->  │ Scheduler Service   │ --->  │ Worker Service      │
+ │ Task API Service   │ --->  │ Scheduler Service     │ --->  │ Worker Service      │
  │ (Create Tasks)     │       │ (Detect Overdue Tasks)│       │ (Send Notifications)│
  └────────────────────┘       └───────────────────────┘       └─────────────────────┘
            │                           │                            │
